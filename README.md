@@ -19,18 +19,15 @@ A sleek, cross-platform media player application built with C++ and Qt 6. This p
 
 ---
 
-## 🆕 Recently Added Feature
 
-### Online Search Integration
-A fully functional search workflow has been added, powered by the Jamendo public API:
+## Online Search Integration
 
-- **`AudioSearchModel`** — A new `QAbstractListModel` subclass that manages network requests (`QNetworkAccessManager`) and exposes results to QML. It handles in-flight request cancellation (aborting the previous request when a new search is triggered), result clearing between searches, and error recovery, with an `isSearching` property that keeps the UI in sync throughout.
+A fully functional search workflow, powered by the Jamendo public API:
+- **`AudioSearchModel`** — A`QAbstractListModel` subclass that manages network requests (`QNetworkAccessManager`) and exposes results to QML. It handles in-flight request cancellation (aborting the previous request when a new search is triggered), result clearing between searches, and error recovery, with an `isSearching` property that keeps the UI in sync throughout.
 - **`SearchPanel.qml`** — A new slide-up panel that displays search results. Each result shows the track thumbnail, title, and artist name. Tapping a result adds it to the playlist and closes the panel. A status message is shown during the search and when no results are returned.
 - **`SearchField.qml`** — A reusable styled text input component with an embedded search icon, focus highlight, and a disabled state that activates while a search is in progress.
 - The top bar now hosts the `SearchField` and a close button that are toggled on/off alongside the search panel, replacing the menu button while search is active.
-
 ---
-
 ## 🛠️ Technology Stack
 
 | Layer | Technology |
