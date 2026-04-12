@@ -6,6 +6,8 @@ Rectangle {
 
     property bool hidden: true
 
+    signal searchRequested
+
     height: 400
     width: 250
 
@@ -40,12 +42,15 @@ Rectangle {
         }
 
         clip: true
+        // Specifying the QAbstractListModel data source that will feed the data to ListView
         model: PlayerController
         spacing: 10
 
+        // delegate => Defines the template for each item fed from the model
         delegate: Rectangle {
             id: delegate
 
+            // Will be populated with the data fed from the QAbstractListModel class (PlayerController)
             required property string audioTitle
             required property string audioAuthorName
             required property url audioSource
@@ -144,13 +149,24 @@ Rectangle {
         height: 32
 
         onButtonClicked: {
-            PlayerController.addAudio("Set Fire To The Rain", "Adele", "qrc:/qt/qml/MusicPlayer/assets/audio/SetFireToTheRain.mp4", "qrc:/qt/qml/MusicPlayer/assets/images/song_3.jpg");
+            root.searchRequested();
+            root.hidden = true;
         }
     }
 
+    /*
+      Behavior on:
+      - A specialized QML object for animation on the property that comes in the on clause
+      - You can use it on alomost any numberit or color property
+      - The code inside its block is executed when the value of the mentioned property changes
+   */
     Behavior on x {
+        // The animatio block of code on the proprety
         PropertyAnimation {
+            // easing.type => determines the acceleration of the change
+            // Easing.InOutQuad => For smooth changes
             easing.type: Easing.InOutQuad
+            // 200 ms
             duration: 200
         }
     }

@@ -34,6 +34,13 @@ PlayerController::PlayerController(QObject *parent)
         QUrl("qrc:/qt/qml/MusicPlayer/assets/videos/video_1.avi")
         );
 
+    addAudio(
+        "Set Fire To The Rain",
+        "Adele",
+        QUrl("qrc:/qt/qml/MusicPlayer/assets/audio/SetFireToTheRain.mp4"),
+        QUrl("qrc:/qt/qml/MusicPlayer/assets/images/song_3.jpg")
+        );
+
     setCurrentSong(m_audioList.first());
 }
 

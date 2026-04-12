@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
+#include "AudioSearchModel.h"
 #include "PlayerController.h"
 
 int main(int argc, char *argv[])
@@ -19,6 +20,9 @@ int main(int argc, char *argv[])
     PlayerController* playerController = new PlayerController(&app);
     //           The name that will be used for the import, major version, minor version, object name in QML, pointer to the object
     qmlRegisterSingletonInstance("com.company.PlayerController", 1, 0, "PlayerController", playerController);
+
+    AudioSearchModel* audioSearchModel = new AudioSearchModel(&app);
+    qmlRegisterSingletonInstance("com.company.AudioSearchModel", 1, 0, "AudioSearchModel", audioSearchModel);
 
     QObject::connect(
         &engine,

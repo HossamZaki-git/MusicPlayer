@@ -1,5 +1,6 @@
 import QtQuick
 import com.company.PlayerController
+import com.company.AudioSearchModel
 
 Window {
     id: root
@@ -9,7 +10,7 @@ Window {
 
     visible: true
 
-    title: qsTr("Song Player")
+    title: qsTr("Music Player")
 
     Rectangle {
         id: topbar
@@ -23,6 +24,25 @@ Window {
         height: 50
         color: "#5F8575"
 
+        SearchField {
+            anchors {
+                left: parent.left
+                right: closeSearchButton.left
+                verticalCenter: parent.verticalCenter
+                margins: 10
+            }
+
+            height: 30
+
+            visible: !searchPanel.hidden
+            enabled: !AudioSearchModel.isSearching
+
+            onAccepted: value => {
+                AudioSearchModel.searchSong(value);
+                topbar.forceActiveFocus();
+            }
+        }
+
         ImageButton {
             anchors {
                 right: parent.right
@@ -34,8 +54,30 @@ Window {
             height: 32
             source: "assets/icons/menu_icon.png"
 
+            visible: searchPanel.hidden
+
             onButtonClicked: {
                 playlistPanel.hidden = !playlistPanel.hidden;
+            }
+        }
+
+        ImageButton {
+            id: closeSearchButton
+
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+                rightMargin: 20
+            }
+
+            height: 32
+            width: 32
+
+            source: "assets/icons/close_icon.png"
+            visible: !searchPanel.hidden
+
+            onButtonClicked: {
+                searchPanel.hidden = true;
             }
         }
     }
@@ -86,6 +128,7 @@ Window {
             ImageButton {
                 id: previousButton
 
+                anchors.verticalCenter: parent.verticalCenter
                 width: 64
                 height: 64
 
@@ -97,6 +140,7 @@ Window {
             ImageButton {
                 id: playPauseButton
 
+                anchors.verticalCenter: parent.verticalCenter
                 width: 64
                 height: 64
 
@@ -108,6 +152,7 @@ Window {
             ImageButton {
                 id: nextButton
 
+                anchors.verticalCenter: parent.verticalCenter
                 width: 64
                 height: 64
 
@@ -126,5 +171,23 @@ Window {
         }
 
         x: hidden ? parent.width : parent.width - width
+
+        // a custom signal in PlayListPanel (becuase the initial search behavior will start from there)
+        onSearchRequested: {
+            searchPanel.hidden = false;
+        }
+    }
+
+    SearchPanel {
+        id: searchPanel
+
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+
+        height: mainSection.height + bottombar.height
+
+        y: hidden ? parent.height : topbar.height
     }
 }

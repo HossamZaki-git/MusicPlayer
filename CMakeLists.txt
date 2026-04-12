@@ -35,6 +35,8 @@ qt_add_qml_module(appMusicPlayer
         assets/icons/add_icon.png
         assets/icons/menu_icon.png
         assets/icons/trash_icon.png
+        assets/icons/search_icon.png
+        assets/icons/close_icon.png
         assets/audio/FlyMeToTheMoon.mpeg
         assets/audio/RollingInTheDeep.mpeg
         assets/audio/TeachMeTonight.mpeg
@@ -43,6 +45,9 @@ qt_add_qml_module(appMusicPlayer
     SOURCES
         PlayerController.h PlayerController.cpp
         AudioInfo.h AudioInfo.cpp
+        QML_FILES SearchPanel.qml
+        QML_FILES SearchField.qml
+        SOURCES AudioSearchModel.h AudioSearchModel.cpp
 )
 
 set_target_properties(appMusicPlayer PROPERTIES

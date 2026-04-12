@@ -3,6 +3,7 @@ import QtMultimedia
 import com.company.PlayerController
 import MusicPlayer
 
+/* USING PlayerController.currentSong IN ALL THE DATA ASSOCIATED WITH THE sources MAKES THE CHANGE OF THIS OBJECT RERENDERS EVERY SINGLE QML PROPERTY IT IS USED IN */
 Item {
     id: root
 
